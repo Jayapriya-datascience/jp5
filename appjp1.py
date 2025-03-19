@@ -7,25 +7,19 @@ import os
 def load_model_and_scaler():
     model_path = os.path.join("modeljp", "trained_modeljp.pkl")
     scaler_path = os.path.join("modeljp", "scalerjp.pkl")
-    
     if not os.path.exists(model_path):
         st.error(f"❌ Model file not found! Expected at: {model_path}")
         st.stop()
-    
-    if not os.path.exists(scaler_path):
-        st.error(f"❌ Scaler file not found! Expected at: {scaler_path}")
-        st.stop()
-    
-    with open(model_path, "rb") as model_file:
-        model = pickle.load(model_file)
-        
-    with open(scaler_path, "rb") as scaler_file:
-        scaler = pickle.load(scaler_file)
-    
-    return model, scaler  # ✅ Correct return statement
-
+        if not os.path.exists(scaler_path):
+            st.error(f"❌ Scaler file not found! Expected at: {scaler_path}")
+            st.stop()
+            with open(model_path, "rb") as model_file:
+                model = pickle.load(model_file)
+                with open(scaler_path, "rb") as scaler_file:
+                    scaler = pickle.load(scaler_file)
+                    return model, scaler  # ✅ Correct return statement
+                    model, scaler = load_model_and_scaler()
 # ✅ Now, call the function outside the function definition.
-model, scaler = load_model_and_scaler()
 st.title("💤 Sleep Disorder Prediction App")
 
 # Personal Info
