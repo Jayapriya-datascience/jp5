@@ -149,7 +149,7 @@ disorder_info = {
 
 # Prediction Button
 if st.button("Predict"):
-    
+    prediction = model.predict(input_features)
     input_features = np.array([[
         age, gender_value, occupation_value, sleep_duration, quality_of_sleep, 
         physical_activity, stress_level, bmi_category, heart_rate, 
@@ -157,7 +157,6 @@ if st.button("Predict"):
     ]])
     
     input_features = scaler.transform(input_features)
-    prediction = model.predict(input_features)
     if prediction[0] == 1:
         st.error("⚠️ High risk of sleep disorder detected! Consult a doctor.")
 
