@@ -25,7 +25,7 @@ def load_model_and_scaler():
     return model, scaler  # ✅ Correct return statement
 
 # ✅ Now, call the function outside the function definition.
-model, scaler = load_model_and_scaler()
+    model, scaler = load_model_and_scaler()
 st.title("💤 Sleep Disorder Prediction App")
 
 # Personal Info
