@@ -25,7 +25,7 @@ def load_model_and_scaler():
     return model, scaler
     # Make sure to call the function here, outside of the function definition.
     model, scaler = load_model_and_scaler()
-st.title("💤 Sleep Disorder Prediction App")
+    st.title("💤 Sleep Disorder Prediction App")
 
 # Personal Info
 st.title("Personal Info")
