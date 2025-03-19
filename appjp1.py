@@ -17,17 +17,14 @@ def load_model_and_scaler():
         st.stop()
     
     with open(model_path, "rb") as model_file:
-        model = pickle.load(model_file)
+        model=pickle.load(model_file)
         
     with open(scaler_path, "rb") as scaler_file:
         scaler = pickle.load(scaler_file)
     
     return model, scaler
-
-# Make sure to call the function here, outside of the function definition.
-model, scaler = load_model_and_scaler()
-
-
+    # Make sure to call the function here, outside of the function definition.
+    model, scaler = load_model_and_scaler()
 st.title("💤 Sleep Disorder Prediction App")
 
 # Personal Info
