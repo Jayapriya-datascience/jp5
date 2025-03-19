@@ -17,15 +17,16 @@ def load_model_and_scaler():
         st.stop()
     
     with open(model_path, "rb") as model_file:
-        model=pickle.load(model_file)
+        model = pickle.load(model_file)
         
     with open(scaler_path, "rb") as scaler_file:
         scaler = pickle.load(scaler_file)
     
-    return model, scaler
-    # Make sure to call the function here, outside of the function definition.
-    model, scaler = load_model_and_scaler()
-    st.title("💤 Sleep Disorder Prediction App")
+    return model, scaler  # ✅ Correct return statement
+
+# ✅ Now, call the function outside the function definition.
+model, scaler = load_model_and_scaler()
+st.title("💤 Sleep Disorder Prediction App")
 
 # Personal Info
 st.title("Personal Info")
@@ -134,6 +135,12 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+input_features = np.array([[
+    age, gender_value, occupation_value, sleep_duration, quality_of_sleep, 
+    physical_activity, stress_level, bmi_category, heart_rate, 
+    daily_steps, systolic, diastolic]])
+input_features = scaler.transform(input_features)
+
 # Sleep Disorders Information
 disorder_info = {
     "Insomnia": ("Difficulty falling or staying asleep.", "Reduce caffeine, maintain a sleep schedule, try relaxation techniques."),
@@ -147,13 +154,6 @@ disorder_info = {
 # Prediction Button
 if st.button("Predict"):
     prediction = model.predict(input_features)
-    input_features = np.array([[
-        age, gender_value, occupation_value, sleep_duration, quality_of_sleep, 
-        physical_activity, stress_level, bmi_category, heart_rate, 
-        daily_steps, systolic, diastolic
-    ]])
-    
-    input_features = scaler.transform(input_features)
     if prediction[0] == 1:
         st.error("⚠️ High risk of sleep disorder detected! Consult a doctor.")
 
